@@ -18,16 +18,36 @@ class Node {
 
 public class IterativeListReversal {
     
+    /**
+     * Method to reverse the list in an iterative approach.
+     * @param head
+     * @return head
+     */
     public static Node reverseList(Node head) {
-        if(head == null ){
-            System.out.println("head is null !!!");
-            return head;
+
+        // If the list is empty, return null.
+        if(head == null) {
+            System.out.println("The list is empty.");
+            return null;
         }
         
+        /**
+         * Maintain three pointers prev, curr and next.
+         * The idea is to reverse the links of all nodes using three pointers:
+         * 
+         * prev: pointer to keep track of the previous node
+         * curr: pointer to keep track of the current node
+         * next: pointer to keep track of the next node
+         * Starting from the first node, initialize curr with the head of linked list
+         * and next with the next node of curr. Update the next pointer of curr with
+         * prev. Finally, move the three pointer by updating prev with curr and curr
+         * with next.
+         */
         Node prev = null;
         Node curr = head;
         Node next;
         
+        // Traverse till the curr points to null.
         while(curr != null) {
             
             next = curr.next;
@@ -36,9 +56,15 @@ public class IterativeListReversal {
             curr = next;
             
         }
+
+        // return the prev pointer.
         return prev;
     }
     
+    /**
+     * Method to print the list.
+     * @param head
+     */
     public static void printList(Node head) {
         while(head != null) {
             System.out.print(head.data + " ");

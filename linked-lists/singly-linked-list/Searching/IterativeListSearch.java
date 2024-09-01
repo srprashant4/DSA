@@ -18,9 +18,17 @@ class Node {
 
 public class IterativeListSearch {
 
+    /**
+     * Method to perform an iterative search on the list.
+     * @param head
+     * @param element
+     * @return
+     */
     public static boolean iterativeSearch(Node head, int element) {
+
+        // If the list is empty, return false.
         if(head == null) {
-            System.out.println("head is null !!!");
+            System.out.println("The list is empty.");
             return false;
         }
         
@@ -35,6 +43,10 @@ public class IterativeListSearch {
         return false;
     }
     
+    /**
+     * Method to print the list.
+     * @param head
+     */
     public static void printList(Node head) {
         while(head != null) {
             System.out.print(head.data + " ");

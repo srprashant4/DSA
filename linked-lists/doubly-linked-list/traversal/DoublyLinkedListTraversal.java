@@ -1,5 +1,5 @@
 /**
- * This class demonstrates the forward and backward traversal techniques in a doubly linked list.
+ * This program demonstrates the forward and backward traversal techniques in a doubly linked list.
  * 
  * Time Complexity: O(n)
  * Space Complexity: O(1)

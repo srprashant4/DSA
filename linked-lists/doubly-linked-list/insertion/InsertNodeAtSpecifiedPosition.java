@@ -1,3 +1,9 @@
+/**
+ * This program demonstrates the insertion of a node at a specified position in a doubly linked list.
+ * 
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
 class Node {
     int data;
     Node next;
@@ -16,22 +22,24 @@ public class InsertNodeAtSpecifiedPosition {
         Node newNode = new Node(data);
 
         if(head == null && pos == 1) {
-            return newNode;
+            return newNode; // Empty list, insert at the beginning.
         }
 
         if(head == null && pos > 1) {
             System.out.println("Specified position does not exist in the list.");
-            return null;
+            return null; // Cannot insert beyond position 1 in an empty list.
         }
 
         if(head != null && pos == 1) {
             newNode.next = head;
             head.prev = newNode;
-            return newNode;
+            return newNode; // New head of the list.
         }
 
         Node curr = head;
         int count = 1;
+
+        // Traverse to the position before the insertion point.
         while(curr != null) {
             if(count == pos - 1) {
                 break;
@@ -40,6 +48,7 @@ public class InsertNodeAtSpecifiedPosition {
             curr = curr.next;
         }
 
+        // If position is beyond the current list length.
         if(curr == null) {
             System.out.println("Invalid position.");
             return null;

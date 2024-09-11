@@ -40,7 +40,7 @@ public class DeleteNodeAtAGivenPosition {
 
         // Traverse to the node just before the one to be deleted
         while(curr != null) {
-            if(count < pos - 1) {
+            if(count == pos - 1) {
                 break;
             }
             count++;

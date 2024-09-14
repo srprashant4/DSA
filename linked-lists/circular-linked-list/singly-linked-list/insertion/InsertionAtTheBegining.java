@@ -1,3 +1,6 @@
+/**
+ * This is a program to insert a node at the begining of a circular linked list.
+ */
 class Node {
     int data;
     Node next;
@@ -13,8 +16,9 @@ public class InsertionAtTheBegining {
     public static Node insertAtBegin(Node last, int data) {
         Node newNode = new Node(data);
 
+        // If the list is null, return the new node.
         if(last == null) {
-            newNode.next = newNode;
+            newNode.next = newNode; // Make the new node a circular list.
             return newNode;
         }
 

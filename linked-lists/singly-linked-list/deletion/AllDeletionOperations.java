@@ -104,15 +104,15 @@ public class AllDeletionOperations {
         printList(head);
 
         System.out.println("List after deleting the first node: ");
-        //head = deleteNodeAtBegin(head);
+        head = deleteNodeAtBegin(head);
         printList(head);
 
         System.out.println("List after deleting the last node: ");
-        //head = deleteNodeAtEnd(head);
+        head = deleteNodeAtEnd(head);
         printList(head);
 
-        System.out.println("List after deleting a node at position");
-        head = deleteAtGivenPosition(head, 6);
+        System.out.println("List after deleting a node at position 3:");
+        head = deleteAtGivenPosition(head, 3);
         printList(head);
     }
 }

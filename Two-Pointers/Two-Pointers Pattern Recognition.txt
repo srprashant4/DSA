@@ -1,0 +1,65 @@
+1) What is the Two Pointer Pattern?
+At its core, Two Pointers is about scanning from two ends (or two speeds) to reduce work from O(n²) → O(n).
+
+You use it when:
+a) You have a sorted array (most common)
+b) You need to pair / compare / search relationships between elements
+c) You want to shrink search space from both sides
+d) You want to avoid nested loops
+
+Two pointers eliminate repeated work.
+
+
+2) Pattern Recognition — When Should You Think “Two Pointers”?
+If the problem involves any of these, your brain must immediately trigger “Two pointers”.
+
+a) Array sorted or can be sorted
+E.g., find a pair that sums to target → sorted array + shrink range.
+
+b) Compare values at both ends
+E.g., valid palindrome → start at ends, meet in center.
+
+c) Remove elements / skip elements
+E.g., remove duplicates in-place.
+
+d) Find closest, largest, smallest pair combinations
+E.g., 3Sum, container with most water.
+
+e) Merging
+E.g., merge two sorted arrays.
+
+f) Fast and slow pointer (linked list)
+Detect cycle, middle of list.
+
+
+3) Two Pointer Templates
+a) Template 1 — Opposite Ends: For sorted arrays or comparing ends:
+int left = 0;
+int right = n - 1;
+
+while (left < right) {
+    if (condition) {
+        // do something
+        left++; right--;
+    } else if (move left) {
+        left++;
+    } else {
+        right--;
+    }
+}
+
+b) Template 2 — Merge Two Sorted Arrays
+int i = 0, j = 0;
+while (i < n1 && j < n2) {
+    if (A[i] <= B[j]) { ... i++; }
+    else { ... j++; }
+}
+
+c) Template 3 — Fast & Slow Pointers: for linked lists:
+ListNode slow = head;
+ListNode fast = head;
+
+while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+}

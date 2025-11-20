@@ -19,15 +19,13 @@ public class CountDigitOccurence {
   
   public int countDigit(int n, int target) {
       n = Math.abs(n); // in case n is negative
+      
       if(n < 10) {
-          if(n == target) return 1;
-          else return 0;
+          return (n == target) ? 1 : 0;
       }
       
-      int count = 0;
+      int match = (n % 10 == target) ? 1 : 0;
       
-      if(target == n % 10) count++;
-      
-      return count + countDigit(n / 10, target);   
+      return match  + countDigit(n / 10, target);   
   }
 }

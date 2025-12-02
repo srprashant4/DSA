@@ -1,0 +1,71 @@
+-> Sliding Window is a technique used to solve problems involving contiguous subarrays or substrings efficiently — usually in O(n) time instead of O(n²).
+
+-> Why Sliding Window Exists? The Core Problem.
+Many problems ask things like:
+a) “Find the longest substring…”
+b) “Find the smallest subarray…”
+c) “Count how many subarrays…”
+d) “Find max/min sum of a subarray of size K”
+e) “Longest substring with at most K distinct characters”
+
+They involve continuous (contiguous) segments of something — strings or arrays.
+The brute-force approach usually tries all possible segments, which is:
+- starting at every index (n possibilities)
+- ending at every other index (n possibilities)
+Total: O(n²). Sliding Window compresses this exploration into one pass.
+
+-> Most problems using sliding window share this property:
+As soon as the window becomes invalid, we can restore validity by moving the left pointer forward.
+Example of invalid situations:
+- Window contains more than K distinct characters
+- Sum becomes larger than allowed
+- Contains a forbidden element
+- Count of a character exceeds limit
+To fix these: you shrink the window from the left.
+
+-> Types of Sliding Windows: There are two primary types, and distinguishing them is critical.
+1) Fixed-Size Sliding Window
+Used when the problem asks:
+- Maximum sum of subarray of size K
+- Count subarrays of length K
+- Average of every window of size K
+Window size never changes → just slide forward.
+
+Mechanics:
+- Expand right by 1
+- Shrink left by 1
+- Maintain data (sum, freq, etc.)
+Complexity: O(n)
+
+2) Variable-Size Sliding Window
+Used when the size is not fixed, but constraint-based:
+- Longest substring with K distinct characters
+- Smallest subarray with sum ≥ target
+- Longest substring without repeating characters
+- Longest substring with at most X vowels, etc.
+
+In this version:
+- Right pointer always moves forward
+- Left pointer moves only when needed (to fix an invalid window)
+
+->  Key Observations That Make Sliding Window Efficient
+1) Monotonicity
+- As the right pointer moves forward, the window grows.
+- As the left pointer moves forward, the window shrinks.
+- But they never move backward → linear time.
+
+2) Reusability of Previous Work
+- When sliding a window from [i..j] to [i+1..j+1], you reuse almost all of the previous window’s data.
+- This avoids re-calculating sums, frequencies, sets, etc.
+
+3) At Most 2N Migrations
+- Right pointer moves ≤ n steps
+- Left pointer moves ≤ n steps
+- Total steps ≤ 2n → O(n).
+
+-> When to Use Sliding Window?
+Use it whenever the problem is about:
+- contiguous subarrays / substrings
+- optimizing something (max/min length, sum, count)
+- when constraints change gradually (distinct count, sum threshold)
+- and brute force appears quadratic

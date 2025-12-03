@@ -69,3 +69,14 @@ Use it whenever the problem is about:
 - optimizing something (max/min length, sum, count)
 - when constraints change gradually (distinct count, sum threshold)
 - and brute force appears quadratic
+
+-> 6 Golden Patterns in Sliding Window:
+1) Max/Min Sum of Subarray of Size K (fixed window)
+2) First Negative in Window / Sliding Minimum (queue-based)
+3) Longest Substring Without Repeating Characters (variable window)
+4) Fruit Into Baskets (at most 2 distinct elements)
+5) Anagrams in a String (frequency map fixed window)
+6) Count of Subarrays With Condition (variable window + math)
+
+-> Formula to determine the size of the window:
+Number of windows = (array length) – (window size) + 1

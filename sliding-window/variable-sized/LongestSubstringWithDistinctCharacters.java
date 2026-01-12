@@ -95,7 +95,7 @@ public class LongestSubstringWithDistinctCharacters {
             while(freqMap.get(ch) > 1) {
                 char leftChar = s.charAt(left);
                 if(freqMap.containsKey(leftChar)) {
-                    freqMap.put(leftChar, freqMap.getOrDefault(ch, 0) - 1);
+                    freqMap.put(leftChar, freqMap.getOrDefault(leftChar, 0) - 1);
                     if(freqMap.get(leftChar) == 0) {
                         freqMap.remove(leftChar);
                     }

@@ -54,6 +54,17 @@ Why maxFreq is NOT decreased when shrinking:
 - It may delay shrinking slightly, but the window size is still valid.
 - This avoids recalculating max frequency and keeps the algorithm O(n).
 
+Why we don’t recompute max frequency
+This is subtle but very important:
+- We never decrease maxFreq even when shrinking the window.
+Why?
+- Recomputing it costs O(26) each time → unnecessary
+- Keeping it slightly outdated: Never breaks correctness
+- Only delays shrinking, which is safe
+
+This trick is a classic sliding window optimization
+Interviewers LOVE this.
+
 Time Complexity:
 ----------------
 O(n), where n = length of the string.
@@ -67,6 +78,14 @@ Core Formula to Remember:
 -------------------------
 windowSize - maxFrequency <= k  → valid window
 windowSize - maxFrequency > k   → shrink window
+
+Where this pattern appears again:
+----------------------------------
+This exact logic repeats in:
+- Longest substring with ≤ K changes
+- Longest repeating character substring
+- Binary string flips
+- Sliding window with “tolerance”
 */
 public class LongestRepeatingCharacterReplacement {
     public static void main(String[] args) {
@@ -77,6 +96,16 @@ public class LongestRepeatingCharacterReplacement {
         System.out.println(lr.characterReplacement(s, k));
     }
 
+    /**
+     * Why this is better than the HashMap approach:
+     * 
+        | Aspect               | HashMap    | int[26]       |
+        | -------------------- | ---------- | ------------- |
+        | Time                 | O(n)       | O(n)          |
+        | Space                | O(k)       | **O(1)**      |
+        | Overhead             | High       | **Minimal**   |
+        | Interview preference | Acceptable | **Excellent** |
+     * */
     public int characterReplacement(String s, int k) {
         int result = 0;
         int left = 0;

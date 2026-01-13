@@ -23,22 +23,26 @@ public class MaxConsecutiveOnes {
         System.out.println(max.longestOnes(nums, k));
     }
 
+    /**
+     * Most Optimal method: How many zeros are in the window?
+     * Having a maxFreq is unecessary in this problem since we are allowed to flip only zeros.
+     * Ones don’t need replacement.
+     * The constraint is simply: number of zeros in window ≤ k.
+     */
     public int longestOnes(int[] nums, int k) {
-        int result = 0;
-        int freq = 0;
         int left = 0;
-        int maxFreq = 0;
+        int zeros = 0;
+        int result = 0;
 
-        for(int right = 0; right < nums.length; right++) {
-            if(nums[right] == 1) {
-                freq++;
+        for (int right = 0; right < nums.length; right++) {
+
+            if (nums[right] == 0) {
+                zeros++;
             }
 
-            maxFreq = Math.max(maxFreq, freq);
-
-            while((right - left + 1) - maxFreq > k) {
-                if(nums[left] == 1) {
-                    freq--;
+            while (zeros > k) {
+                if (nums[left] == 0) {
+                    zeros--;
                 }
                 left++;
             }
@@ -48,4 +52,32 @@ public class MaxConsecutiveOnes {
 
         return result;
     }
+
+    // Lesser Optimal way: We do not need to maintain a maxFreq here.
+    
+    // public int longestOnes(int[] nums, int k) {
+    //     int result = 0;
+    //     int freq = 0;
+    //     int left = 0;
+    //     int maxFreq = 0;
+
+    //     for(int right = 0; right < nums.length; right++) {
+    //         if(nums[right] == 1) {
+    //             freq++;
+    //         }
+
+    //         maxFreq = Math.max(maxFreq, freq);
+
+    //         while((right - left + 1) - maxFreq > k) {
+    //             if(nums[left] == 1) {
+    //                 freq--;
+    //             }
+    //             left++;
+    //         }
+
+    //         result = Math.max(result, right - left + 1);
+    //     }
+
+    //     return result;
+    // }
 }

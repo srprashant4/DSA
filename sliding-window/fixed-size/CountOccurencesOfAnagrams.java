@@ -114,3 +114,35 @@ public class CountOccurencesOfAnagrams {
         return result;
     }
 }
+
+// Alternate approach using an array of size 26 instead of a hashmap. This is possible because we are only dealing with lowercase letters.
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        int[] freq = new int[26];
+
+        for(char ch : p.toCharArray()) {
+            freq[ch - 'a']++;
+        }
+
+        int left = 0;
+
+        char[] charArr = s.toCharArray();
+        int[] window = new int[26];
+        List<Integer> result = new ArrayList<>();
+
+        for(int right = 0; right < charArr.length; right++) {
+            char current = charArr[right];
+
+            window[current - 'a']++;
+            if(right - left + 1 == p.length()) {
+                if(Arrays.equals(freq, window)) {
+                    result.add(left);
+                }
+
+                window[charArr[left] - 'a']--;
+                left++;
+            }
+        }
+        return result;
+    }
+}

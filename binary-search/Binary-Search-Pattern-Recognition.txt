@@ -1,0 +1,226 @@
+## Binary Search — Invariants, Bounds, and Interview Patterns
+- Binary search is not just about finding an element. It is fundamentally about searching a monotonic space using invariants.
+- Think of it as: “Maintain a region where the answer must exist, and shrink it safely.”
+
+1. Core Idea
+- Binary search works when:
+    a. The search space is ordered or monotonic
+    b. You can answer a question like: Is mid valid?
+- And this question splits the space into:
+    a. one side that can be discarded
+    b. one side that may contain the answer
+
+2. The Key Concept: Invariants
+- An invariant is something that remains true throughout the loop.
+- Common invariant: The answer is always inside [left, right]. Every iteration must preserve this.
+- Why invariants matter: Most binary search bugs happen because people update pointers without preserving:
+    a. search space correctness
+    b. termination guarantees
+    c. boundary inclusiveness
+
+3. Two Main Binary Search Styles:
+
+    A) Closed Interval — [left, right]
+        - Both ends are inclusive.
+        - left, right = 0, n - 1
+            while left <= right:
+                mid = left + (right - left) // 2
+
+                if condition(mid):
+                    right = mid - 1
+                else:
+                    left = mid + 1
+        - Invariant: Answer lies in [left, right]
+        - Common use
+            a. Exact match search
+            b. Classic textbook binary search
+
+    B) Half-Open Interval — [left, right)
+        - Right boundary excluded.
+        - left, right = 0, n
+            while left < right:
+                mid = left + (right - left) // 2
+
+                if condition(mid):
+                    right = mid
+                else:
+                    left = mid + 1
+        - Invariant: Answer lies in [left, right)
+        - Why many engineers prefer this
+            a. Cleaner termination
+            b. Natural for lower_bound / upper_bound
+            c. Fewer off-by-one errors
+
+4. Lower Bound and Upper Bound (Most Important Interview Concept)
+    - Binary search often asks:
+        a. first valid position
+        b. insertion point
+        c. smallest index satisfying condition
+    - Lower Bound
+        a. First index where: arr[i] >= target
+        b. algorithm:
+            def lower_bound(arr, target):
+            left, right = 0, len(arr)
+            while left < right:
+                mid = (left + right) // 2
+                if arr[mid] < target:
+                    left = mid + 1
+                else:
+                    right = mid
+
+            return left
+        c. Invariant
+            i. left always points to first possible answer
+            ii. [0, left) is invalid
+            iii. [left, n) may contain answer 
+    - Upper Bound
+        a. First index where: arr[i] > target
+        b. Only one line changes:
+            if arr[mid] <= target:
+                left = mid + 1
+            else:
+                right = mid
+    - Why Bounds Matter
+        a. They solve first occurrence
+        b. They solve last occurrence
+        c. They solve insertion index
+        d. They solve counting duplicates
+        e. They solve range queries
+    - Example: 
+        a. count = upper_bound - lower_bound
+
+5. Binary Search on Answer (Huge Interview Pattern)
+    - You don’t search values — you search solutions.
+    - Examples:
+        a. minimum capacity to ship packages
+        b. smallest speed to eat bananas
+        c. allocate books
+        d. minimum time problems
+    - Pattern:
+        left, right = MIN_POSSIBLE, MAX_POSSIBLE
+        while left < right:
+            mid = (left + right) // 2
+            if feasible(mid):
+                right = mid
+            else:
+                left = mid + 1
+    - Key Insight
+        a. If: feasible(x) => feasible(x + 1), Then the search space is monotonic.
+
+6. Template Mental Model
+    - Always ask:
+        a. What is the search space?
+            i. indices?
+            ii. values?
+            iii. answers?
+        b. What is the invariant?
+            i. where is the answer guaranteed to be?
+        c. What makes mid valid/invalid?
+        d. Which side can be safely discarded?
+
+7. Edge Cases (Interview Gold)
+    - Infinite Loop:
+        a. Wrong: left = mid
+        b. When left == mid, loop never progresses.
+        c. Fix: left = mid + 1
+    - Overflow in Mid Calculation
+        a. Bad (in some languages): mid = (left + right) / 2
+        b. Safe: mid = left + (right - left) / 2
+    - Empty Array:
+        a. Always works if using:
+            left, right = 0, n
+            while left < right
+    - Single Element Array
+        a. Must terminate correctly.
+        b. Example:
+            left = 0, right = 1
+        c. Loop runs exactly once.
+    - All Elements Smaller / Larger
+        a. Lower bound may return:
+            i. n (insert at end)
+            ii. 0 (insert at start)
+        b. Always validate before indexing.
+    - Duplicates
+        a. Classic trap:
+            i. exact match doesn’t guarantee first occurrence
+            ii. use lower_bound / upper_bound instead
+    - Off-by-One Bugs
+        a. Most common error: mixing:
+            i. [left, right]
+            ii [left, right)
+        b. Never mix templates.
+    - Choosing wrong template:
+        a. Use:
+            | Problem Type            | Template        |
+            | ----------------------- | --------------- |
+            | Exact match             | closed interval |
+            | First/last occurrence   | half-open       |
+            | Binary search on answer | half-open       |
+
+8. Interview Cheat Sheet (Condensed)
+    - Find Element:
+        while left <= right
+    - First true / lower bound
+        while left < right
+    - Last true
+        Search first false then subtract 1.
+
+9. Intuition Upgrade (Senior-Level Thinking)
+    - Binary search is really:
+        Maintaining two regions:
+            definitely bad
+            potentially good
+        And shrinking the boundary between them.
+    - Once you see this, binary search becomes a boundary-finding algorithm, not a value-finding one.
+
+10. Universal Binary Search Template (Recommended)
+
+def binary_search_first_true(lo, hi):
+    # answer in [lo, hi)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if is_true(mid):
+            hi = mid
+        else:
+            lo = mid + 1
+    return lo
+- This template solves ~80% of interview binary search problems.
+
+11. Common Interview Questions Using These Concepts
+    a. First/last occurrence in sorted array
+    b. Search insert position
+    c. Find minimum in rotated array
+    d. Koko Eating Bananas
+    e. Ship packages within D days
+    f. Split array largest sum
+    g. Capacity to ship / allocation problems
+    h. Aggressive cows / maximize minimum distance
+
+12. Important:
+    | Problem          | Condition        | We Want    |
+    | ---------------- | ---------------- | ---------- |
+    | First occurrence | arr[i] >= target | First True |
+    | Last occurrence  | arr[i] <= target | Last True  |
+    | Lower bound      | arr[i] >= target | First True |
+    | Upper bound      | arr[i] > target  | First True |
+- Binary Search is always find first true or last true.
+
+13. Four Core Boundaries:
+    - For condition: arr[i] >= target:
+        | Pattern     | First True |
+        | ----------- | ---------- |
+        | F F F F F F | n          |
+        | T T T T T T | 0          |
+        | F F T T T T | first T    |
+        | T T T F F F | 0          |
+
+    - For condition arr[i] ≤ target:
+        | Pattern     | Last True |
+        | ----------- | --------- |
+        | F F F F F F | -1        |
+        | T T T T T T | n-1       |
+        | T T T F F F | last T    |
+        | F F T T T T | n-1       |
+
+
+

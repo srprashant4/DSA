@@ -231,5 +231,22 @@ def binary_search_first_true(lo, hi):
         b. Last True
     That’s it.
 
+15. Boundary Logic
+    - Whenever you see: [T, T, T, T, T, T]
+        a. First True → index 0
+        b. Last True → index 5
 
+    - Whenever you see: [F, F, F, F, F, F]
+        a. First True → does not exist → return n (in insertion logic)
+        b. Last True → does not exist → return -1
+    
+    - Whenever you see: [F, F, T, T, T, T]
+        a. First True → first T
+        b. Last True → last T
+
+    - Whenever you see: [T, T, T, T, F, F]
+        a. First True → index 0
+        b. Last True → last T before F
+    
+    - Binary search is nothing more than detecting that flip point.
 

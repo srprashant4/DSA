@@ -222,5 +222,14 @@ def binary_search_first_true(lo, hi):
         | T T T F F F | last T    |
         | F F T T T T | n-1       |
 
+14. Big Picture Insight
+    - Binary search becomes clean and stable when you:
+    - Define a monotonic condition
+    - Convert the array to True/False mentally
+    - Search for either:
+        a. First True
+        b. Last True
+    That’s it.
+
 
 

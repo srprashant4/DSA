@@ -1,0 +1,130 @@
+/**
+ * ================================================
+ *              Binary Tree Fundamentals
+ * ================================================
+ *
+ * A Tree is a hierarchical data structure consisting of nodes connected by edges.
+ * Each node contains a value and references to its child nodes.
+ *
+ * In a Binary Tree, each node can have at most two children:
+ *
+ *      - Left Child
+ *      - Right Child
+ *
+ * ------------------------------------------------
+ * Example Binary Tree
+ * ------------------------------------------------
+ *
+ *            1
+ *           / \
+ *          2   3
+ *         / \
+ *        4   5
+ *
+ * Root Node:        1
+ * Internal Nodes:   1, 2, 3
+ * Leaf Nodes:       3, 4, 5
+ *
+ * ------------------------------------------------
+ * Important Terminology
+ * ------------------------------------------------
+ *
+ * Root
+ *      The topmost node of the tree.
+ *
+ * Parent
+ *      A node that has children.
+ *
+ * Child
+ *      A node that descends from another node.
+ *
+ * Leaf Node
+ *      A node with no children.
+ *
+ * Subtree
+ *      Any node and all its descendants form a subtree.
+ *
+ * Height / Depth
+ *      The number of nodes in the longest path from root to a leaf node.
+ *
+ * ------------------------------------------------
+ * Tree Traversal
+ * ------------------------------------------------
+ *
+ * Tree traversal means visiting every node in the tree exactly once.
+ *
+ * There are two major traversal strategies:
+ *
+ * 1. Depth First Search (DFS)
+ *      - Preorder Traversal
+ *      - Inorder Traversal
+ *      - Postorder Traversal
+ *
+ * 2. Breadth First Search (BFS)
+ *      - Level Order Traversal
+ *
+ * ------------------------------------------------
+ * DFS Traversals
+ * ------------------------------------------------
+ *
+ * Preorder Traversal (Root → Left → Right)
+ *
+ * Example:
+ *
+ *            1
+ *           / \
+ *          2   3
+ *         / \
+ *        4   5
+ *
+ * Output:
+ * 1 2 4 5 3
+ *
+ * ------------------------------------------------
+ *
+ * Inorder Traversal (Left → Root → Right)
+ *
+ * Output:
+ * 4 2 5 1 3
+ *
+ * ------------------------------------------------
+ *
+ * Postorder Traversal (Left → Right → Root)
+ *
+ * Output:
+ * 4 5 2 3 1
+ *
+ * ------------------------------------------------
+ * Core Tree Insight
+ * ------------------------------------------------
+ *
+ * Trees are naturally recursive structures.
+ *
+ * Any tree problem can usually be solved by:
+ *
+ *      1. Solving the problem for the left subtree
+ *      2. Solving the problem for the right subtree
+ *      3. Combining the results
+ *
+ * This is why recursion is heavily used for tree problems.
+ *
+ * ------------------------------------------------
+ * Time Complexity of DFS Traversals
+ * ------------------------------------------------
+ *
+ * Every node is visited exactly once.
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(h)
+ *
+ * where:
+ *      n = number of nodes
+ *      h = height of the tree (recursion stack)
+ *
+ * Worst case (skewed tree):
+ *      O(n)
+ *
+ * Balanced tree:
+ *      O(log n)
+ *
+ */

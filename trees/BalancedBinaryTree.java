@@ -25,7 +25,6 @@ package trees;
  * * ------------------------------------------------------------
  * Intuition:
  * * ------------------------------------------------------------
- * 
  * A tree is a recursive structure.
  * Each node depends on its left and right subtree.
  * For any node:
@@ -46,8 +45,9 @@ package trees;
  * Approach:
  * * * ------------------------------------------------------------
  * We can use a depth-first search (DFS) approach to check the height of each subtree.
- * We will return -1 if we find any subtree that is not balanced.
- * This way, we can avoid unnecessary calculations and improve efficiency.
+ * We return -1 if we find any subtree that is not balanced. This way, we can avoid unnecessary calculations and improve efficiency.
+ * We return the height of the current node if it is balanced.
+ * This is a special value that indicates the subtree is balanced and allows us to calculate the height of the parent node.
  * 
  * * Time Complexity: O(n) where n is the number of nodes in the tree.
  * * * Space Complexity: O(h) where h is the height of the tree (due to recursion stack).
